@@ -10,7 +10,7 @@ const RightContent: React.FC<RightContextProps> = () => {
     <>
       <AuthModal />
       <Flex justify={"center"} align={"center"}>
-        <AuthButtons />
+        {user ? <>Thjere is a user</> : <AuthButtons />}
       </Flex>
     </>
   );
