@@ -98,7 +98,7 @@ const Login: React.FC = () => {
           fontWeight={700}
           cursor={"pointer"}
           onClick={() =>
-            setAuthModalState((prev) => ({ ...prev, view: "signup" }))
+            setAuthModalState((prev) => ({ ...prev, view: "resetPassword" }))
           }
         >
           Reset Password
