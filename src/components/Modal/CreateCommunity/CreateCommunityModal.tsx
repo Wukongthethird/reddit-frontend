@@ -10,6 +10,9 @@ import {
   Box,
   Text,
   Input,
+  Checkbox,
+  Stack,
+  Flex,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 
@@ -23,8 +26,13 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
   open,
   handleClose,
 }) => {
+  // form  input state
   const [communityName, setCommunityName] = useState("");
+  // messae input
   const [charsRemainding, setCharsRemainding] = useState(21);
+
+  // check box input
+  const [communityType, setCommunityType] = useState("public");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.value.length > 21) {
@@ -32,6 +40,12 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
     }
     setCommunityName(event.target.value);
     setCharsRemainding(21 - event.target.value.length);
+  };
+
+  const onCommunityTypeChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setCommunityType(event.target.name);
   };
 
   return (
@@ -72,7 +86,62 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
                 pl="22px"
                 onChange={handleChange}
               />
-              <Text>{charsRemainding} Characters remainding</Text>
+              <Text
+                color={charsRemainding === 0 ? "red" : "gray.500"}
+                fontSize="9pt"
+              >
+                {charsRemainding} Characters remainding
+              </Text>
+              <Box mt={4} mb={4}>
+                <Text>Community Type</Text>
+                {/* {<checkbox/>} */}
+                <Stack spacing={2}>
+                  <Checkbox
+                    name="public"
+                    isChecked={communityType === "public"}
+                    onChange={onCommunityTypeChange}
+                  >
+                    <Flex align="center">
+                      <Text fontSize={"10pt"} mr={1}>
+                        Public
+                      </Text>
+                      <Text fontSize={"8pt"} color="gray.500" pt={1}>
+                        Anyone can view,post and comment in this community
+                      </Text>
+                    </Flex>
+                  </Checkbox>
+                  <Checkbox
+                    name="restrict"
+                    isChecked={communityType === "restrict"}
+                    onChange={onCommunityTypeChange}
+                  >
+                    <Flex align="center">
+                      <Text fontSize={"10pt"} mr={1}>
+                        Restricted
+                      </Text>
+                      <Text fontSize={"8pt"} color="gray.500" pt={1}>
+                        Anyone can view this community but only approved users
+                        can post
+                      </Text>
+                    </Flex>
+                  </Checkbox>
+                  <Checkbox
+                    name="private"
+                    isChecked={communityType === "private"}
+                    onChange={onCommunityTypeChange}
+                  >
+                    <Flex align="center">
+                      <Text fontSize={"10pt"} mr={1}>
+                        Private
+                      </Text>
+                      <Text fontSize={"8pt"} color="gray.500" pt={1}>
+                        Only approved users can view and submit in this
+                        community
+                      </Text>
+                    </Flex>
+                  </Checkbox>
+                </Stack>
+              </Box>
             </ModalBody>
           </Box>
 
