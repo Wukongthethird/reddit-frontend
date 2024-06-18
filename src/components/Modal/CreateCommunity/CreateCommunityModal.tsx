@@ -55,7 +55,7 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
     if (event.target.value.length > 21) {
       return;
     }
-    setCommunityName(event.target.value);
+    setCommunityName(event.target.value.toLowerCase());
     setCharsRemainding(21 - event.target.value.length);
   };
 
