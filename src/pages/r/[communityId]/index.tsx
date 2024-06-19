@@ -8,6 +8,7 @@ import safeJsonStringify from "safe-json-stringify";
 import NotFound from "@/components/Community/NotFound";
 import Header from "@/components/Community/Header";
 import PageContent from "@/components/layout/PageContent";
+import CreatePostLink from "@/components/Community/CreatePostLink";
 
 type CommunityPageProps = {
   communityData: Community;
@@ -22,7 +23,7 @@ const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
       <Header communityData={communityData} />
       <PageContent>
         <>
-          <div>LHS</div>
+          <CreatePostLink />
         </>
         <>
           <div>RHS</div>
