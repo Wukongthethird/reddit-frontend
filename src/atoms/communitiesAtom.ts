@@ -1,6 +1,7 @@
 import { Timestamp } from "firebase/firestore";
 import { atom } from "recoil";
 
+// basis of comunity
 export interface Community {
   id: string;
   creatorId: string;
@@ -10,6 +11,7 @@ export interface Community {
   imageUrl?: string;
 }
 
+// subcommunity
 export interface CommunitySnippets {
   communityId: string;
   isModerator?: boolean;
