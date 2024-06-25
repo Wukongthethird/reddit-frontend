@@ -94,7 +94,7 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
           creatorId: user?.uid,
           createdAt: serverTimestamp(),
           numberOfMembers: 1,
-          priivacyType: communityType,
+          privacyType: communityType,
         });
         //creat collection snippet on user
         transaction.set(

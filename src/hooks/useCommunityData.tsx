@@ -66,7 +66,7 @@ const useCommunityData = () => {
       // create a new community
       const newSnippet: CommunitySnippets = {
         communityId: communityData.id,
-        imageURL: communityData.imageUrl || "",
+        imageURL: communityData.imageURL || "",
       };
       batch.set(
         doc(
