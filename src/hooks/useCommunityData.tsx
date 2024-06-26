@@ -126,6 +126,11 @@ const useCommunityData = () => {
 
   useEffect(() => {
     if (!user) {
+      //clears snippets on logout
+      setCommunityStateValue((prev) => ({
+        ...prev,
+        mySnippets: [],
+      }));
       return;
     }
     getMySnippets();
