@@ -1,5 +1,6 @@
 import { Post } from "@/atoms/postsAtom";
 import About from "@/components/Community/About";
+import Comments from "@/components/Posts/Comments/Comments";
 import PostItem from "@/components/Posts/PostItem";
 import PageContent from "@/components/layout/PageContent";
 import { auth, firestore } from "@/firebase/clientApp";
@@ -54,7 +55,13 @@ const PostPage: React.FC = () => {
             userIsCreator={user?.uid === postStateValue.selectedPost?.creatorId}
           />
         )}
-        {/* {<Comments/>} */}
+        {
+          <Comments
+            user={user as User}
+            selectPost={postStateValue.selectedPost}
+            communityId={postStateValue.selectedPost?.communityId as string}
+          />
+        }
       </>
       <>
         {communityStateValue.currentCommunity && (
