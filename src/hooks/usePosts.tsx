@@ -161,11 +161,11 @@ const usePosts = () => {
       //check if image delete fire storage
       // delete post doc from firestore
       //update recoil store
+      return true;
     } catch (error: any) {
       console.log("onDelete post errpr");
       return false;
     }
-    return true;
   };
 
   const getCommunityPostVotes = async (communityId: string) => {
