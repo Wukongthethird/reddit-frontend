@@ -53,7 +53,7 @@ const Posts: React.FC<PostsProps> = ({ communityData }) => {
   // postStateValue.posts.map((item) => console.log(item));
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [communityData]);
   return (
     <>
       {loading ? (
