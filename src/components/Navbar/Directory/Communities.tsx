@@ -32,7 +32,7 @@ const Communities: React.FC<CommunitiesProps> = () => {
             />
           ))}
       </Box>
-      {/* <MenuItem
+      <MenuItem
         width={"100%"}
         fontSize={"10pt"}
         _hover={{ bg: "gray.100" }}
@@ -42,7 +42,7 @@ const Communities: React.FC<CommunitiesProps> = () => {
           <Icon fontSize={20} mr={2} as={GrAdd} />
           Create Community
         </Flex>
-      </MenuItem> */}
+      </MenuItem>
       {mySnippets.map((snippet) => (
         <MenuListItem
           key={snippet.communityId}
