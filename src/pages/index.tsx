@@ -1,6 +1,7 @@
 import { communityState } from "@/atoms/communitiesAtom";
-import { Post } from "@/atoms/postsAtom";
+import { Post, PostVote } from "@/atoms/postsAtom";
 import CreatePostLink from "@/components/Community/CreatePostLink";
+import Recommendations from "@/components/Community/Recommendations";
 import PostItem from "@/components/Posts/PostItem";
 import PostLoader from "@/components/Posts/PostLoader";
 import PageContent from "@/components/layout/PageContent";
@@ -83,7 +84,27 @@ const Home: NextPage = () => {
     setLoading(false);
   };
 
-  const getUserPostVotes = () => {};
+  const getUserPostVotes = async () => {
+    try {
+      const postIds = postStateValue.postVotes.map((post) => post.id);
+      const postVoteQuery = query(
+        collection(firestore, `users/{user?.uid}/postVotes`),
+        where("postId", "in", postIds)
+      );
+      const postVoteDocs = await getDocs(postVoteQuery);
+      const postVotes = postVoteDocs.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      setPostStateValue((prev) => ({
+        ...prev,
+        postVotes: postVotes as PostVote[],
+      }));
+    } catch (error) {
+      console.log("getUserPostVotes error", error);
+    }
+  };
 
   useEffect(() => {
     if (communityStateValue.snippetsFetch) {
@@ -95,7 +116,21 @@ const Home: NextPage = () => {
     if (!user && !loadingUser) {
       buildNoUserHomeFeed();
     }
+
+    //clean up function clear old states
+    return () => {
+      setPostStateValue((prev) => ({
+        ...prev,
+        postVotes: [],
+      }));
+    };
   }, [user, loadingUser]);
+
+  useEffect(() => {
+    if (user && postStateValue.posts.length) {
+      getUserPostVotes();
+    }
+  }, [user, postStateValue.posts]);
   return (
     <PageContent>
       <>
@@ -123,7 +158,7 @@ const Home: NextPage = () => {
           </Stack>
         )}
       </>
-      <>{/* {<Recommendations/>} */}</>
+      <>{<Recommendations />}</>
     </PageContent>
   );
 };
