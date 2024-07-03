@@ -47,41 +47,40 @@ const AuthModal: React.FC = () => {
   return (
     <>
       <Modal isOpen={modalState.open} onClose={handleClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader textAlign={"center"}>
-            {modalState.view === "login" && "Login"}
-            {modalState.view === "signup" && "Sign Up"}
-            {modalState.view === "resetPassword" && "Reset Password"}
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody
-            display="flex"
-            flexDirection="column"
-            alignItems={"center"}
-            justifyContent={"center"}
-            pb={6}
+        {/* <ModalContent> */}
+        <ModalHeader textAlign={"center"}>
+          {modalState.view === "login" && "Login"}
+          {modalState.view === "signup" && "Sign Up"}
+          {modalState.view === "resetPassword" && "Reset Password"}
+        </ModalHeader>
+        <ModalCloseButton />
+        <ModalBody
+          display="flex"
+          flexDirection="column"
+          alignItems={"center"}
+          justifyContent={"center"}
+          pb={6}
+        >
+          <Flex
+            direction={"column"}
+            align={"center"}
+            justify={"center"}
+            width="70%"
           >
-            <Flex
-              direction={"column"}
-              align={"center"}
-              justify={"center"}
-              width="70%"
-            >
-              {modalState.view === "login" || modalState.view === "signup" ? (
-                <>
-                  <OAuthButtons />
-                  <Text color="gray.500" fontWeight={700}>
-                    OR
-                  </Text>
-                  <AuthInputs />
-                </>
-              ) : (
-                <>{<ResetPassword toggleView={toggleView} />}</>
-              )}
-            </Flex>
-          </ModalBody>
-        </ModalContent>
+            {modalState.view === "login" || modalState.view === "signup" ? (
+              <>
+                <OAuthButtons />
+                <Text color="gray.500" fontWeight={700}>
+                  OR
+                </Text>
+                <AuthInputs />
+              </>
+            ) : (
+              <>{<ResetPassword toggleView={toggleView} />}</>
+            )}
+          </Flex>
+        </ModalBody>
+        {/* </ModalContent> */}
       </Modal>
     </>
   );
