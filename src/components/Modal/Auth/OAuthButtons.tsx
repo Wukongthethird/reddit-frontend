@@ -33,7 +33,7 @@ const OAuthButtons: React.FC = () => {
         Continue with Google
       </Button>
       <Button>Continue With Google</Button>
-      {error && <Text>{error}</Text>}
+      {error && <Text>{error.message}</Text>}
     </Flex>
   );
 };
