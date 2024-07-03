@@ -4,6 +4,7 @@ import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { auth, firestore } from "../../../firebase/clientApp";
 import { User } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
+import { FIREBASE_ERRORS } from "@/firebase/errors";
 
 const OAuthButtons: React.FC = () => {
   const [signInWithGoogle, userCred, loading, error] =
@@ -21,6 +22,7 @@ const OAuthButtons: React.FC = () => {
       createUserDocument(userCred.user);
     }
   }, [userCred]);
+  console.log(error, "login error");
   return (
     <Flex direction={"column"} width="100%" mb={4}>
       <Button
@@ -33,7 +35,11 @@ const OAuthButtons: React.FC = () => {
         Continue with Google
       </Button>
       <Button>Continue With Google</Button>
-      {error && <Text>{error.message}</Text>}
+      {error && (
+        <Text>
+          {FIREBASE_ERRORS[error?.message as keyof typeof FIREBASE_ERRORS]}
+        </Text>
+      )}
     </Flex>
   );
 };
