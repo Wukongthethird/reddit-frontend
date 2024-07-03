@@ -29,12 +29,15 @@ const OAuthButtons: React.FC = () => {
         variant="oauth"
         mb={2}
         isLoading={loading}
-        onClick={() => signInWithGoogle()}
+        onClick={(event) => {
+          event.preventDefault();
+          signInWithGoogle();
+        }}
       >
         <Image src="/images/googlelogo.png" height="20px" mr={4} />
         Continue with Google
       </Button>
-      <Button>Continue With Google</Button>
+
       {error && (
         <Text>
           {FIREBASE_ERRORS[error?.message as keyof typeof FIREBASE_ERRORS]}
