@@ -183,7 +183,7 @@ const Comments: React.FC<CommentsProps> = ({
                 borderColor={"gray.100"}
               >
                 <Text fontWeight={700} opacity={0.3}>
-                  Ain't no chickens clucking yet.
+                  {`Ain't no chickens clucking yet.`}
                 </Text>
               </Flex>
             ) : (
