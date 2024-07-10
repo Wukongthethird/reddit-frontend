@@ -55,6 +55,7 @@ const PostItem: React.FC<PostItemProps> = ({
   const singlePostPage = !onSelectPost;
   const router = useRouter();
   const [error, setError] = useState("");
+  const { communityId } = router.query;
   const handleDelete = async (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
@@ -74,6 +75,8 @@ const PostItem: React.FC<PostItemProps> = ({
     }
     setLoadingDelete(false);
   };
+
+  console.log("posTITEM", homePage);
 
   return (
     <Flex
@@ -164,6 +167,8 @@ const PostItem: React.FC<PostItemProps> = ({
           <Text fontSize={"12pt"} fontWeight={600}>
             {post.title}
           </Text>
+          {singlePostPage && <Text fontSize={"12pt"}>{post.body}</Text>}
+
           {post.imageURL && (
             <Flex justify={"center"} align={"center"} p={2}>
               {loadingImage && (

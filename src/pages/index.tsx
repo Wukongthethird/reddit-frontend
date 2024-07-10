@@ -21,6 +21,7 @@ import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRecoilValue } from "recoil";
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
   const [user, loadingUser] = useAuthState(auth);
@@ -131,6 +132,7 @@ const Home: NextPage = () => {
       getUserPostVotes();
     }
   }, [user, postStateValue.posts]);
+
   return (
     <PageContent>
       <>
