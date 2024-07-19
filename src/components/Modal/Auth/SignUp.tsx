@@ -27,13 +27,16 @@ const SignUp: React.FC = () => {
 
     if (error) {
       setError("");
+      return;
     }
     if (signUpForm.password !== signUpForm.confirmPassword) {
       setError("Passwords do not match");
       return;
     }
-
+    console.log("here, sign up");
     createUserWithEmailAndPassword(signUpForm.email, signUpForm.password);
+
+    return;
   };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
