@@ -111,6 +111,7 @@ const Home: NextPage = () => {
     if (communityStateValue.snippetsFetch) {
       buildUserHomeFeed();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [communityStateValue.snippetsFetch]);
 
   useEffect(() => {
@@ -125,12 +126,14 @@ const Home: NextPage = () => {
         postVotes: [],
       }));
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, loadingUser]);
 
   useEffect(() => {
     if (user && postStateValue.posts.length) {
       getUserPostVotes();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, postStateValue.posts]);
 
   return (

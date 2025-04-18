@@ -156,6 +156,7 @@ const useCommunityData = () => {
       return;
     }
     getMySnippets();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   useEffect(() => {

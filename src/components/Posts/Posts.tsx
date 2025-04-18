@@ -53,6 +53,7 @@ const Posts: React.FC<PostsProps> = ({ communityData }) => {
   // postStateValue.posts.map((item) => console.log(item));
   useEffect(() => {
     getPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [communityData]);
   return (
     <>

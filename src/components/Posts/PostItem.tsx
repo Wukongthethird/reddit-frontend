@@ -140,6 +140,7 @@ const PostItem: React.FC<PostItemProps> = ({
                     borderRadius={"full"}
                     boxSize={"18px"}
                     mr={2}
+                    alt="meaningful text"
                   />
                 ) : (
                   <Icon
