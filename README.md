@@ -31,9 +31,12 @@ git clone https://github.com/username/reddit-frontend.git
    ```
 
 3. **Set Up Database**:
+   <br>
    Create a Firebase Store
+   <br>
    collections
 
+    <br>
    comments
    &nbsp;&nbsp;&nbsp;&nbsp;communityId;
    emsp createdAt
