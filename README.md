@@ -35,7 +35,7 @@ git clone https://github.com/username/reddit-frontend.git
    collections
 
    comments
-   &emsp communityId;
+   &nbsp;&nbsp;&nbsp;&nbsp;communityId;
    emsp createdAt
    emsp creatorDisplayText
    emsp creatorId
