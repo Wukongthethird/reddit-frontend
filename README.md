@@ -31,33 +31,7 @@ git clone https://github.com/username/reddit-frontend.git
    ```
 
 3. **Set Up Database**:
-   <br>
    Create a Firebase Store
-   <br>
-   collections
-
-    <br>
-   comments
-   &nbsp;&nbsp;&nbsp;&nbsp;communityId;
-   emsp createdAt
-   emsp creatorDisplayText
-   emsp creatorId
-   emsp id
-   emsp postId
-   emsp postTitle
-   emsp text
-
-   communities
-   id
-   createdAt
-   creatorId
-   numberOfMembers
-   privacyType
-   imageURL
-
-   posts
-
-   users
 
 4. **Create .env.local with the following variables**:
 
