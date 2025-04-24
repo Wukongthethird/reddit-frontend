@@ -43,7 +43,6 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
   const onClick = () => {
     if (!user) {
       setAuthModalState({ open: true, view: "login" });
-      return;
     }
     const { communityId } = router.query;
     if (communityId) {
