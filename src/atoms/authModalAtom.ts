@@ -1,5 +1,14 @@
 import { atom } from "recoil";
 
+/**
+ * Global Recoil atom to manage the state of the authentication modal.
+ *
+ * @type {AuthModalState}
+ * @property {boolean} open - Whether the modal is visible or not.
+ * @property {"login" | "signup" | "resetPassword"} view - Current view being shown in the modal.
+ *
+ */
+
 export interface AuthModalState {
   open: boolean;
   view: ModalView;
@@ -13,6 +22,6 @@ const defaultModalState: AuthModalState = {
 };
 
 export const authModalState = atom<AuthModalState>({
-  key: "authModalState",
+  key: "authModalState", // unique key for this atom
   default: defaultModalState,
 });

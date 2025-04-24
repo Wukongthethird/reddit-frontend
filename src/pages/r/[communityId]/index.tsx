@@ -19,7 +19,7 @@ type CommunityPageProps = {
 
 const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
   const setCommunityStateValue = useSetRecoilState(communityState);
-
+  console.log("comu", communityData);
   useEffect(() => {
     setCommunityStateValue((prev) => ({
       ...prev,
@@ -49,7 +49,6 @@ const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
 };
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  console.log(context);
   // get community dayta pass it to client
   try {
     const communityDocRef = doc(
@@ -57,7 +56,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       "communities",
       context.query.communityId as string
     );
-
+    console.log("cpm", context);
     const communityDoc = await getDoc(communityDocRef);
     console.log("comm, ", communityDoc.data());
     return {
@@ -75,6 +74,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   } catch (error) {
     console.log("getServerSideProps error", error);
     // could do error page
+    return { notFound: true };
   }
 }
 

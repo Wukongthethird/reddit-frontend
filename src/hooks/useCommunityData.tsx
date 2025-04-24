@@ -4,6 +4,7 @@ import {
   CommunitySnippets,
   communityState,
 } from "@/atoms/communitiesAtom";
+import Communities from "@/components/Navbar/Directory/Communities";
 import { auth, firestore } from "@/firebase/clientApp";
 import {
   collection,
@@ -144,7 +145,8 @@ const useCommunityData = () => {
       console.log("getCommunityData", error);
     }
   };
-
+  console.log(user);
+  console.log(communityStateValue);
   useEffect(() => {
     if (!user) {
       //clears snippets on logout

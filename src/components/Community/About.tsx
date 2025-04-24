@@ -22,6 +22,8 @@ import { FaReddit } from "react-icons/fa";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { RiCakeLine } from "react-icons/ri";
 import { useSetRecoilState } from "recoil";
+import { authModalState } from "@/atoms/authModalAtom";
+import { useRouter } from "next/router";
 
 type AboutProps = {
   communityData: Community;
@@ -29,11 +31,26 @@ type AboutProps = {
 
 const About: React.FC<AboutProps> = ({ communityData }) => {
   const [user] = useAuthState(auth);
+  const router = useRouter();
   const selectedFileRef = useRef<HTMLInputElement>(null);
   const [uploadingImage, setUploadingImage] = useState(false);
   const { selectedFile, onSelectFile } = useSelectFile();
   const setCommunityStateValue = useSetRecoilState(communityState);
+  const setAuthModalState = useSetRecoilState(authModalState);
 
+  // changes community icon used if user is admin
+
+  const onClick = () => {
+    if (!user) {
+      setAuthModalState({ open: true, view: "login" });
+      return;
+    }
+    const { communityId } = router.query;
+    if (communityId) {
+      router.push(`/r/${communityId}/submit`);
+      return;
+    }
+  };
   const onUpdateImage = async () => {
     if (!selectedFile) {
       return;
@@ -110,11 +127,11 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
               </Text>
             )}
           </Flex>
-          <Link href={`/r/${communityData.id}/submit`}>
-            <Button mt={3} height="30px">
-              Create Post
-            </Button>{" "}
-          </Link>
+          {/* <Link href={`/r/${communityData.id}/submit`}> */}
+          <Button mt={3} height="30px" onClick={onClick}>
+            Create Post
+          </Button>{" "}
+          {/* </Link> */}
           {user?.uid === communityData.creatorId && (
             <>
               <Divider />
