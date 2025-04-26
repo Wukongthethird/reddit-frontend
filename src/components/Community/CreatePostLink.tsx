@@ -8,7 +8,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { BsLink45Deg } from "react-icons/bs";
 import { FaReddit } from "react-icons/fa";
 import { IoImageOutline } from "react-icons/io5";
-import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
+import { useSetRecoilState, useRecoilState } from "recoil";
 
 const CreatePostLink: React.FC = () => {
   const router = useRouter();
@@ -20,7 +20,6 @@ const CreatePostLink: React.FC = () => {
   const onClick = () => {
     if (!user) {
       setAuthModalState({ open: true, view: "login" });
-      return;
     }
     const { communityId } = router.query;
     if (communityId) {
