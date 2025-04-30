@@ -26,6 +26,7 @@ const Posts: React.FC<PostsProps> = ({ communityData }) => {
 
   const getPosts = async () => {
     setLoading(true);
+    console.log("communityData", communityData);
     try {
       // get posts for this community
       const postsQuery = query(

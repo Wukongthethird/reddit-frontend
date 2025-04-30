@@ -13,6 +13,7 @@ type TextInputsProps = {
   loading: boolean;
 };
 
+// essentially a submit form
 const TextInputs: React.FC<TextInputsProps> = ({
   textInputs,
   onChange,

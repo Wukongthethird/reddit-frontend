@@ -10,6 +10,7 @@ import { FaReddit } from "react-icons/fa";
 type CommunitiesProps = {};
 
 const Communities: React.FC<CommunitiesProps> = () => {
+  //list of communites the user follows
   const [open, setOpen] = useState(false);
   const mySnippets = useRecoilValue(communityState).mySnippets;
   return (

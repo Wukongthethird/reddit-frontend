@@ -8,6 +8,7 @@ type ImageUploadProps = {
   setSelectedFile: (value: string) => void;
 };
 
+//most of these inout comes  useSelectedFile hook. it handles the client side of checking and selecting file from local machine
 const ImageUpload: React.FC<ImageUploadProps> = ({
   selectedFile,
   onSelectImage,
