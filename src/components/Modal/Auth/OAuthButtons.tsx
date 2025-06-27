@@ -6,10 +6,24 @@ import { User } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { FIREBASE_ERRORS } from "@/firebase/errors";
 
+/**
+ * OAuthButtons Component
+ *
+ * This component handles OAuth-based sign-in
+ * using Firebase Authentication and Firestore.
+ *
+ * Features:
+ * - Sign in with Google
+ * - Creates a Firestore user document if login is successful
+ * - Displays error messages if login fails
+ */
+
 const OAuthButtons: React.FC = () => {
+  // Firebase hook to handle Google Sign-In
   const [signInWithGoogle, userCred, loading, error] =
     useSignInWithGoogle(auth);
 
+  // Creates a Firestore user document for the authenticated user
   const createUserDocument = async (user: User) => {
     //creats an object or doc
     const userDocRef = doc(firestore, "users", user.uid);
@@ -17,14 +31,17 @@ const OAuthButtons: React.FC = () => {
     await setDoc(userDocRef, JSON.parse(JSON.stringify(user)));
   };
 
+  // creates new user on login
   useEffect(() => {
     if (userCred) {
       createUserDocument(userCred.user);
     }
   }, [userCred]);
-  console.log(error, "login error");
+
   return (
     <Flex direction={"column"} width="100%" mb={4}>
+      {/* Google OAuth Button */}
+
       <Button
         variant="oauth"
         mb={2}

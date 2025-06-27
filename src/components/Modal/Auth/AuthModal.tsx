@@ -20,9 +20,24 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../../firebase/clientApp";
 import ResetPassword from "./ResetPassword";
 
+/**
+ * AuthModal component
+ *
+ * This renders a modal for authentication throughout the app.
+ * It provides interfaces for Login, Signup, and Reset Password views.
+ *
+ * ## Features
+ * - Renders conditionally based on Recoil state (`authModalState`)
+ * - Integrates Firebase Auth (`useAuthState`)
+ * - Closes automatically when a user is authenticated
+ * - Allows toggling between auth views
+ *
+ * @component
+ */
 const AuthModal: React.FC = () => {
-  // similar to state like useState
+  // Recoil state to control modal visibility and current view
   const [modalState, setModalState] = useRecoilState(authModalState);
+  // Firebase Auth hook: returns user, loading state, and error
   const [user, loading, error] = useAuthState(auth);
 
   const handleClose = () => {

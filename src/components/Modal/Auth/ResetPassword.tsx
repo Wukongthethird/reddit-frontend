@@ -7,13 +7,28 @@ import { auth } from "../../../firebase/clientApp";
 import { useSetRecoilState } from "recoil";
 
 type ResetPasswordProps = {
-  toggleView: (view: ModalView) => void;
+  toggleView: (view: ModalView) => void; // Optional function to switch modal views
 };
-
+/**
+ * ResetPassword Component
+ *
+ * Allows users to initiate a password reset using Firebase Authentication.
+ *
+ * Features:
+ * - Email input field
+ * - Sends reset link via Firebase
+ * - UI feedback on success or error
+ * - Navigation links to login and signup
+ */
 const ResetPassword: React.FC<ResetPasswordProps> = ({ toggleView }) => {
   const setAuthModalState = useSetRecoilState(authModalState);
+
   const [email, setEmail] = useState("");
+  // State to track if reset email was sent successfully
+
   const [success, setSuccess] = useState(false);
+  // Firebase hook to send password reset email
+
   const [sendPasswordResetEmail, sending, error] =
     useSendPasswordResetEmail(auth);
 

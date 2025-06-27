@@ -8,27 +8,43 @@ import { FIREBASE_ERRORS } from "../../../firebase/errors";
 import { User } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
 
+/**
+ * SignUp Component
+ *
+ * Handles user registration using email/password via Firebase Authentication.
+ * Also stores user data in Firestore upon successful registration.
+ *
+ * Features:
+ * - Validates password match
+ * - Displays Firebase and custom error messages
+ * - Stores new user in Firestore under 'users' collection
+ * - Navigates between auth views using Recoil state
+ */
 const SignUp: React.FC = () => {
   const setAuthModalState = useSetRecoilState(authModalState);
+  // Form input state
 
   const [signUpForm, setSignUpForm] = useState({
     email: "",
     password: "",
     confirmPassword: "",
   });
+  // Custom error for validation
 
   const [error, setError] = useState("");
+  // Firebase hook to handle signup
 
   const [createUserWithEmailAndPassword, userCred, loading, userError] =
     useCreateUserWithEmailAndPassword(auth);
   //firebase
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+    // Clear previous error
     if (error) {
       setError("");
       return;
     }
+    // Firebase create user
     if (signUpForm.password !== signUpForm.confirmPassword) {
       setError("Passwords do not match");
       return;
@@ -39,6 +55,10 @@ const SignUp: React.FC = () => {
     return;
   };
 
+  /**
+   * Handles input field changes
+   * Updates local form state
+   */
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     // update form state
     setSignUpForm((prev) => ({
@@ -56,6 +76,10 @@ const SignUp: React.FC = () => {
     );
   };
 
+  /**
+   * useEffect runs once userCred changes (i.e. successful signup)
+   * to create Firestore document
+   */
   useEffect(() => {
     if (userCred) {
       createUserDocument(userCred.user);
@@ -64,6 +88,8 @@ const SignUp: React.FC = () => {
 
   return (
     <form onSubmit={onSubmit}>
+      {/* Email Field */}
+
       <Input
         required
         name="email"
@@ -86,6 +112,8 @@ const SignUp: React.FC = () => {
         }}
         bg="gray.50"
       />
+      {/* Password Field */}
+
       <Input
         required
         name="password"
@@ -108,6 +136,8 @@ const SignUp: React.FC = () => {
         }}
         bg="gray.50"
       />
+      {/* Confirm Password Field */}
+
       <Input
         required
         name="confirmPassword"
@@ -146,6 +176,8 @@ const SignUp: React.FC = () => {
       >
         Sign Up
       </Button>
+      {/* Link to Login View */}
+
       <Flex fontSize="9pt" justifyContent={"center"}>
         <Text mr={1}>Already a redditor?</Text>
         <Text
