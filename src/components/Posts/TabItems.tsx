@@ -8,6 +8,7 @@ type TabItemsProps = {
   setSelectedTab: (value: string) => void;
 };
 
+// handles tabs on submit post form
 const TabItems: React.FC<TabItemsProps> = ({
   item,
   selected,

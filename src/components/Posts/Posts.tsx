@@ -24,9 +24,9 @@ const Posts: React.FC<PostsProps> = ({ communityData }) => {
     onDeletePost,
   } = usePosts();
 
+  // Get feed for community
   const getPosts = async () => {
     setLoading(true);
-    console.log("communityData", communityData);
     try {
       // get posts for this community
       const postsQuery = query(

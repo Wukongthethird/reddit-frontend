@@ -130,6 +130,7 @@ const useCommunityData = () => {
     setLoading(false);
   };
 
+  // only call this when we go to the post or submit page
   const getCommunityData = async (communityId: string) => {
     try {
       const communityDocRef = doc(firestore, "communities", communityId);
@@ -161,8 +162,10 @@ const useCommunityData = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
+  // checks if we went to a community directly from the url
   useEffect(() => {
     const { communityId } = router.query;
+    // is community data type
     if (communityId && !communityStateValue.currentCommunity) {
       getCommunityData(communityId as string);
     }

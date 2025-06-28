@@ -19,7 +19,7 @@ type CommunityPageProps = {
 
 const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
   const setCommunityStateValue = useSetRecoilState(communityState);
-  console.log("comu", communityData);
+
   useEffect(() => {
     setCommunityStateValue((prev) => ({
       ...prev,
@@ -56,9 +56,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       "communities",
       context.query.communityId as string
     );
-    console.log("cpm", context);
     const communityDoc = await getDoc(communityDocRef);
-    console.log("comm, ", communityDoc.data());
     return {
       props: {
         communityData: communityDoc.exists()

@@ -64,7 +64,7 @@ const usePosts = () => {
         };
 
         batch.set(postVoteRef, newVote);
-
+        //update recoil atom to match back end
         updatedPost.voteStatus = voteStatus + vote;
         updatedPostVotes = [...updatedPostVotes, newVote];
       } else {
@@ -101,7 +101,7 @@ const usePosts = () => {
           voteChange = 2 * vote;
         }
       }
-      //update state with update d states
+      //update state with updated states
       const postIdx = postStateValue.posts.findIndex(
         (item) => item.id === post.id
       );
@@ -130,6 +130,7 @@ const usePosts = () => {
     }
   };
 
+  // grabs the comments of the post
   const onSelectPost = (post: Post) => {
     setPostStateValue((prev) => ({
       ...prev,
@@ -170,7 +171,7 @@ const usePosts = () => {
 
   const getCommunityPostVotes = async (communityId: string) => {
     const postVotesQuery = query(
-      // finds all user postvotes
+      // finds all user postvotes in the community
       collection(firestore, `users`, `${user?.uid}/postVotes`),
       where(`communityId`, "==", communityId)
     );

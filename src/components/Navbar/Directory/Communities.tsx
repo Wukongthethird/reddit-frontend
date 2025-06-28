@@ -12,6 +12,7 @@ type CommunitiesProps = {};
 const Communities: React.FC<CommunitiesProps> = () => {
   //list of communites the user follows
   const [open, setOpen] = useState(false);
+  //grabs list of follow user community from atom
   const mySnippets = useRecoilValue(communityState).mySnippets;
   return (
     <>

@@ -13,10 +13,11 @@ import { TiHome } from "react-icons/ti";
 import Communities from "./Communities";
 import useDirectory from "@/hooks/useDirectory";
 
-// dropdown on far right side
+// dropdown on left side handles list of communities.
 const Directory: React.FC = () => {
   const { directoryState, toggleMenuOpen } = useDirectory();
   return (
+    // handles visibility of dropdown
     <Menu isOpen={directoryState.isOpen}>
       <MenuButton
         cursor="pointer"
@@ -32,6 +33,8 @@ const Directory: React.FC = () => {
           justify="space-between"
           width={{ base: "auto", lg: "200px" }}
         >
+          {/* Display either the selected community's image or icon */}
+
           {directoryState.selectedMenuItem?.imageURL ? (
             <Image
               alt={directoryState.selectedMenuItem.displayText}
@@ -48,6 +51,8 @@ const Directory: React.FC = () => {
               color={directoryState.selectedMenuItem.iconColor}
             />
           )}
+          {/* Text label for selected menu item (visible on larger screens) */}
+
           <Flex align="center">
             <Flex display={{ base: "none", lg: "flex" }}>
               <Text fontWeight={600} fontSize="10pt">

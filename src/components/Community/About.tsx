@@ -33,13 +33,13 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
   const [user] = useAuthState(auth);
   const router = useRouter();
   const selectedFileRef = useRef<HTMLInputElement>(null);
+  //allows for image change if admin
   const [uploadingImage, setUploadingImage] = useState(false);
   const { selectedFile, onSelectFile } = useSelectFile();
   const setCommunityStateValue = useSetRecoilState(communityState);
   const setAuthModalState = useSetRecoilState(authModalState);
 
   // changes community icon used if user is admin
-
   const onClick = () => {
     if (!user) {
       setAuthModalState({ open: true, view: "login" });
@@ -50,6 +50,7 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
       return;
     }
   };
+  //updates icon in firebase
   const onUpdateImage = async () => {
     if (!selectedFile) {
       return;

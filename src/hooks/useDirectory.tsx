@@ -15,7 +15,9 @@ const useDirectory = () => {
   const communityStateValue = useRecoilValue(communityState);
   const router = useRouter();
 
+  // goes tot he community. interacts with directory atom if this is the selected community
   const onSelectMenuItem = (menuItem: DirectoryMenuItem) => {
+    // sets selected menut item as the one you clicked on
     setDirectoryState((prev) => ({
       ...prev,
       selectedMenuItem: menuItem,
@@ -26,15 +28,18 @@ const useDirectory = () => {
     }
   };
 
+  // handles directory toggle
   const toggleMenuOpen = () =>
     setDirectoryState((prev) => ({
       ...prev,
       isOpen: !directoryState.isOpen,
     }));
 
+  // will set the icon in directory automattically prevents render shennanigans
   useEffect(() => {
     const { currentCommunity } = communityStateValue;
     if (currentCommunity) {
+      // its the icon showed on directory
       setDirectoryState((prev) => ({
         ...prev,
         selectedMenuItem: {

@@ -41,6 +41,7 @@ type PostItemProps = {
   homePage?: boolean;
 };
 
+// Actual post item
 const PostItem: React.FC<PostItemProps> = ({
   post,
   userIsCreator,
@@ -50,6 +51,7 @@ const PostItem: React.FC<PostItemProps> = ({
   onVote,
   homePage,
 }) => {
+  // state before the image load since we would have a post box item on screen
   const [loadingImage, setLoadingImage] = useState(true);
   const [loadingDelete, setLoadingDelete] = useState(false);
   const singlePostPage = !onSelectPost;
