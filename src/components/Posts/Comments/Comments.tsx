@@ -34,6 +34,10 @@ type CommentsProps = {
   communityId: string;
 };
 
+/**
+ * Displays the comments section under a post.
+ * Handles fetching, creating, and deleting comments using Firestore.
+ */
 const Comments: React.FC<CommentsProps> = ({
   user,
   selectPost,
@@ -46,6 +50,12 @@ const Comments: React.FC<CommentsProps> = ({
   const [loadingDeleteId, setLoadingDeleteId] = useState("");
   const setPostState = useSetRecoilState(postState);
 
+  /**
+   * Handles creating a new comment.
+   * - Writes comment to Firestore.
+   * - Updates post's comment count.
+   * - Updates client-side state.
+   */
   const onCreateComment = async () => {
     setCreateLoading(true);
     try {
@@ -74,6 +84,8 @@ const Comments: React.FC<CommentsProps> = ({
       await batch.commit();
 
       //update client recoil state
+      // Update UI state
+
       setCommentText("");
       setComments((prev) => [newComment, ...prev]);
       setPostState((prev) => ({
@@ -90,6 +102,14 @@ const Comments: React.FC<CommentsProps> = ({
     setCreateLoading(false);
   };
 
+  /**
+   * Handles deleting a comment.
+   * - Removes comment from Firestore.
+   * - Decrements post comment count.
+   * - Updates local state.
+   *
+   * @param {Comment} comment - The comment to be deleted
+   */
   const onDeleteComment = async (comment: Comment) => {
     setLoadingDeleteId(comment.id);
     try {
@@ -120,6 +140,9 @@ const Comments: React.FC<CommentsProps> = ({
     setLoadingDeleteId("");
   };
 
+  /**
+   * Fetches all comments for the selected post from Firestore.
+   */
   const getPostComments = async () => {
     try {
       const commentsQuery = query(
@@ -140,6 +163,8 @@ const Comments: React.FC<CommentsProps> = ({
     }
     setFetchLoading(false);
   };
+
+  // Fetch comments when a new post is selected
 
   useEffect(() => {
     if (!selectPost) {

@@ -11,6 +11,11 @@ type CommentInputProps = {
   onCreateComment: () => void;
 };
 
+/**
+ * Renders a comment textarea for authenticated users.
+ * If the user is not logged in, it prompts the user to log in or sign up.
+ *
+ */
 const CommentInput: React.FC<CommentInputProps> = ({
   commentText,
   user,
@@ -22,12 +27,16 @@ const CommentInput: React.FC<CommentInputProps> = ({
     <Flex direction="column" position="relative">
       {user ? (
         <>
+          {/* Displays the user's email username as part of the comment header */}
+
           <Text mb={1}>
             Comment as{" "}
             <span style={{ color: "#3182CE" }}>
               {user?.email?.split("@")[0]}
             </span>
           </Text>
+          {/* Comment text area */}
+
           <Textarea
             value={commentText}
             onChange={(event) => setCommentText(event.target.value)}
@@ -42,6 +51,8 @@ const CommentInput: React.FC<CommentInputProps> = ({
               border: "1px solid black",
             }}
           />
+          {/* Submit button fixed at the bottom of the textarea */}
+
           <Flex
             position="absolute"
             left="1px"
@@ -63,6 +74,8 @@ const CommentInput: React.FC<CommentInputProps> = ({
           </Flex>
         </>
       ) : (
+        // Prompt for users who are not logged in
+
         <Flex
           align="center"
           justify="space-between"

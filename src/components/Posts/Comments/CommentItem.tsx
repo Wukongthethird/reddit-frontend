@@ -25,7 +25,10 @@ type CommentItemProps = {
   loadingDelete: boolean;
   userId?: string | null;
 };
-
+/**
+ *  Renders a single comment item, including text, metadata,
+ * voting icons, and edit/delete actions.
+ */
 const CommentItem: React.FC<CommentItemProps> = ({
   comment,
   onDeleteComment,
@@ -37,7 +40,11 @@ const CommentItem: React.FC<CommentItemProps> = ({
       <Box>
         <Icon fontSize={30} color="gray.300" as={FaReddit} />
       </Box>
+      {/* Comment content area */}
+
       <Stack spacing={1}>
+        {/* Header: Username, timestamp, and spinner if deleting */}
+
         <Stack direction={"row"} align="center" fontSize="8pt">
           <Text fontWeight={700}>{comment.creatorDisplayText}</Text>
           <Text color={"gray.500"}>
@@ -46,6 +53,8 @@ const CommentItem: React.FC<CommentItemProps> = ({
           {loadingDelete && <Spinner size="sm" />}
         </Stack>
         <Text fontSize="10pt">{comment.text}</Text>
+        {/* Action icons: Upvote/Downvote and Edit/Delete if user is the creator */}
+
         <Stack
           direction={"row"}
           align="center"
