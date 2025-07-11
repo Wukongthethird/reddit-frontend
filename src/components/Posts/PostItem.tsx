@@ -41,7 +41,22 @@ type PostItemProps = {
   homePage?: boolean;
 };
 
-// Actual post item
+/**
+ * PostItem Component
+ *
+ * a single post in a Reddit-like application.
+ * It displays post details, allows voting, deletion, and navigation to a single post view.
+ *
+ * Props:
+ * - post: The Post object containing all relevant post data.
+ * - userIsCreator: Boolean indicating if the current user is the post's creator.
+ * - userVoteValue: The current user's vote on this post (1, -1, or undefined).
+ * - onVote: Function to handle vote actions (upvote/downvote).
+ * - onDeletePost: Function to handle deleting the post.
+ * - onSelectPost: Optional function triggered when the post is clicked (used in feed view).
+ * - homePage: Boolean indicating if the component is rendered on the homepage (for community icon rendering).
+ */
+
 const PostItem: React.FC<PostItemProps> = ({
   post,
   userIsCreator,
@@ -57,7 +72,12 @@ const PostItem: React.FC<PostItemProps> = ({
   const singlePostPage = !onSelectPost;
   const router = useRouter();
   const [error, setError] = useState("");
-  const { communityId } = router.query;
+  // const { communityId } = router.query;
+
+  /**
+   * Handles deletion of the post.
+   * Prevents propagation, sets loading state, and navigates on success.
+   */
   const handleDelete = async (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
@@ -90,6 +110,8 @@ const PostItem: React.FC<PostItemProps> = ({
       cursor={singlePostPage ? "unset" : "pointer"}
       onClick={() => onSelectPost && onSelectPost(post)}
     >
+      {/* Voting Column */}
+
       <Flex
         direction={"column"}
         align={"center"}
@@ -120,13 +142,19 @@ const PostItem: React.FC<PostItemProps> = ({
           cursor={"pointer"}
         />
       </Flex>
+      {/* Post Content */}
+
       <Flex direction={"column"} width={"100%"}>
+        {/* Error Alert */}
+
         {error && (
           <Alert status="error">
             <AlertIcon />
             <Text mr={2}> Error Creating Post</Text>
           </Alert>
         )}
+        {/* Post Header */}
+
         <Stack spacing={1} p="10px">
           <Stack
             direction={"row"}
@@ -167,10 +195,13 @@ const PostItem: React.FC<PostItemProps> = ({
               {moment(new Date(post.createdAt?.seconds * 1000)).fromNow()}
             </Text>
           </Stack>
+          {/* Post Title and Body */}
+
           <Text fontSize={"12pt"} fontWeight={600}>
             {post.title}
           </Text>
           {singlePostPage && <Text fontSize={"12pt"}>{post.body}</Text>}
+          {/* Post Image */}
 
           {post.imageURL && (
             <Flex justify={"center"} align={"center"} p={2}>
@@ -187,6 +218,8 @@ const PostItem: React.FC<PostItemProps> = ({
             </Flex>
           )}
         </Stack>
+        {/* Post Footer (Actions) */}
+
         <Flex ml={1} mb={0.5} color="gray.500" fontWeight={600}>
           <Flex
             align="center"
@@ -218,6 +251,7 @@ const PostItem: React.FC<PostItemProps> = ({
             <Icon as={IoBookmarkOutline} mr={2} />
             <Text fontSize={"9pt"}>save</Text>
           </Flex>
+          {/* Delete (Only for Creator) */}
           {userIsCreator && (
             <Flex
               align="center"

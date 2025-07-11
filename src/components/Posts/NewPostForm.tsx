@@ -20,6 +20,7 @@ import { firestore, storage } from "@/firebase/clientApp";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import useSelectFile from "@/hooks/useSelectFile";
 
+// Tabs selection
 const formTabs: TabItem[] = [
   {
     title: "Post",
@@ -57,16 +58,24 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
   communityImageURL,
 }) => {
   const router = useRouter();
+  // Track the currently selected tab (default is "Post")
   const [selectedTab, setSelectedTab] = useState(formTabs[0].title);
+  // state to submit text
   const [textInputs, setTextInputs] = useState({
     title: "",
     body: "",
   });
+
+  // UI state: loading and error flags
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   // const [selectedFile, setSelectedFile] = useState<string>();
+
   const { selectedFile, onSelectFile, setSelectedFile } = useSelectFile();
 
+  /**
+   * Handles the creation of a new post
+   */
   const handleCreatePost = async () => {
     const { communityId } = router.query;
     //create new post object => type post
@@ -84,11 +93,17 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
     // store post in db
     setLoading(true);
     try {
+      // Add post to Firestore and get document reference
+
       const postDocRef = await addDoc(collection(firestore, "posts"), newPost);
       // check if selected  file
       // image goes to storage => getdownloadurl (return imageurl)
       if (selectedFile) {
+        // Upload as base64 string
+
         const imageRef = ref(storage, `posts/${postDocRef.id}/image`);
+        // Update Firestore post document with the image URL
+
         await uploadString(imageRef, selectedFile, `data_url`);
         const downloadURL = await getDownloadURL(imageRef);
         //update post doc by adding image url
@@ -121,6 +136,9 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
   //     }
   //   };
   // };
+  /**
+   * Handles input changes for title and body fields
+   */
 
   const onTextChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>

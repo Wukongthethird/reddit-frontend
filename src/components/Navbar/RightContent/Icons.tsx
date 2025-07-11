@@ -49,7 +49,7 @@ const Icons: React.FC = () => {
           <Icon as={IoVideocamOutline} fontSize={22} />
         </Flex>
       </Flex>
-
+      {/*If flex box is too small and cant show all icons */}
       <Flex>
         <Flex
           mr={1.5}
