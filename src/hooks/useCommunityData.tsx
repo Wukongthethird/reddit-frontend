@@ -19,11 +19,17 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRecoilState, useSetRecoilState } from "recoil";
 
+/**
+ * useCommunityData.ts
+ *
+ * Custom React hook for managing community-related user data.
+ * Handles joining/leaving communities, fetching user community snippets, and loading specific community data.
+ */
 const useCommunityData = () => {
   const [user] = useAuthState(auth);
   const router = useRouter();
   const [communityStateValue, setCommunityStateValue] =
-    useRecoilState(communityState);
+    useRecoilState(communityState); // Global community state from Recoil
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const setAuthModalState = useSetRecoilState(authModalState);
@@ -44,6 +50,10 @@ const useCommunityData = () => {
     joinCommunity(communityData);
   };
 
+  /**
+   * Fetches the communities the current user has joined.
+   * Stores the results in Recoil state.
+   */
   const getMySnippets = async () => {
     setLoading(true);
     try {
@@ -63,6 +73,9 @@ const useCommunityData = () => {
     }
     setLoading(false);
   };
+
+  //Joins a community: Adds the snippet and increments member count.
+
   const joinCommunity = async (communityData: Community) => {
     setLoading(true);
     try {
@@ -100,6 +113,8 @@ const useCommunityData = () => {
     }
     setLoading(false);
   };
+
+  // Leaves a community: Removes the snippet and decrements member count.
 
   const leaveCommunity = async (communityId: string) => {
     setLoading(true);
@@ -146,8 +161,9 @@ const useCommunityData = () => {
       console.log("getCommunityData", error);
     }
   };
-  console.log(user);
-  console.log(communityStateValue);
+
+  //   * Effect: When user changes (login/logout), fetch their snippets or reset.
+
   useEffect(() => {
     if (!user) {
       //clears snippets on logout

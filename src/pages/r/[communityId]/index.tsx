@@ -17,10 +17,20 @@ type CommunityPageProps = {
   communityData: Community;
 };
 
+/**
+ * CommunityPage.tsx
+ *
+ * Displays a community page including its header, posts, and sidebar details.
+ * Uses SSR to pre-fetch community data from Firestore.
+ * Renders the community page if the community exists.
+ * Sets the currentCommunity in Recoil state when component mounts.
+ */
 const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
   const setCommunityStateValue = useSetRecoilState(communityState);
 
   useEffect(() => {
+    // Store current community data in global Recoil state
+
     setCommunityStateValue((prev) => ({
       ...prev,
       currentCommunity: communityData,
@@ -47,7 +57,12 @@ const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
     </>
   );
 };
-
+/**
+ * getServerSideProps
+ *
+ * Fetches the community data on each request (SSR).
+ * This ensures the community exists and provides its data to the page.
+ */
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   // get community dayta pass it to client
   try {

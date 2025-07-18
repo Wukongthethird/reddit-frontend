@@ -15,7 +15,7 @@ const useDirectory = () => {
   const communityStateValue = useRecoilValue(communityState);
   const router = useRouter();
 
-  // goes tot he community. interacts with directory atom if this is the selected community
+  // goes to the community. interacts with directory atom if this is the selected community
   const onSelectMenuItem = (menuItem: DirectoryMenuItem) => {
     // sets selected menut item as the one you clicked on
     setDirectoryState((prev) => ({
